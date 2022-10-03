@@ -2,19 +2,21 @@
 title: "PSTAT 131 HW1"
 author: "Lishan Shi"
 date: "2022-10-01"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 Machine Learning Main Ideas
 Please answer the following questions. Be sure that your solutions are clearly marked and that your document is neatly formatted.
 
 You don’t have to rephrase everything in your own words, but if you quote directly, you should cite whatever materials you use (this can be as simple as “from the lecture/page # of book”).
 
-Question 1:
+**Question 1:**
 Define supervised and unsupervised learning. What are the difference(s) between them?
 
-Supervised learning: We are interested in how to accurately predict future response using given predictors. In other words, we are trying to understand how predictors affect response. In terms of model selection, we may try multiple different models to predict and find the best model for response given predictors. From a inference view, we assess the quality of our predictions and estimation. (from lecture) Supervised statistical learning involves building a statistical model for predicting, or estimating, an output based on one or more inputs.(ISLR #1)
+Supervised learning: We are interested in how to accurately predict future response using given predictors. In other words, we are trying to understand how predictors affect response. In terms of model selection, we may try multiple different models to predict and find the best model for response given predictors. From a inference view, we assess the quality of our predictions and estimation (from lecture). Supervised statistical learning involves building a statistical model for predicting, or estimating, an output based on one or more inputs (ISLR #1).
 
-Unsupervised learning: In this case, we only have predictors but not response, which means that there is no answer key for the prediction.(from lecture) With the unsupervised learning, there are inputs but no supervising output; nevertheless we can learn relationships and structure from such data.For example, in a marketing setting, we might have demographic information for a number of current or potential customers. We may wish to understand which types of customers are similar to each other by grouping individuals according to their observed characteristics. This is known as a clustering problem. Unlike in the supervised learning, here we are not trying to predict an output variable.(ISLR #1 & #4)
+Unsupervised learning: In this case, we only have predictors but not response, which means that there is no answer key for the prediction (from lecture). With the unsupervised learning, there are inputs but no supervising output; nevertheless we can learn relationships and structure from such data. For example, in a marketing setting, we might have demographic information for a number of current or potential customers. We may wish to understand which types of customers are similar to each other by grouping individuals according to their observed characteristics. This is known as a clustering problem. Unlike in the supervised learning, here we are not trying to predict an output variable (ISLR #1 & #4).
 
 The main difference between supervised and unsupervised learning is whether we have response or not. The goal for supervised learning is to accurately predict the response based on predictors, whereas for unsupervised learning, we are no longer interested in prediction but in the relationship and structure of data.
 
