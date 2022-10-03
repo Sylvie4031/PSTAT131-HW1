@@ -121,27 +121,27 @@ as simple as ``from the lecture/page \# of book'').
 \textbf{Question 1:} Define supervised and unsupervised learning. What
 are the difference(s) between them?
 
-Supervised learning: We are interested in how to accurately predict
-future response using given predictors. In other words, we are trying to
-understand how predictors affect response. In terms of model selection,
-we may try multiple different models to predict and find the best model
-for response given predictors. From a inference view, we assess the
-quality of our predictions and estimation (from lecture). Supervised
-statistical learning involves building a statistical model for
-predicting, or estimating, an output based on one or more inputs (ISLR
-\#1).
+\textbf{Supervised learning:} We are interested in how to accurately
+predict future response using given predictors. In other words, we are
+trying to understand how predictors affect response. In terms of model
+selection, we may try multiple different models to predict and find the
+best model for response given predictors. From a inference view, we
+assess the quality of our predictions and estimation (from lecture).
+Supervised statistical learning involves building a statistical model
+for predicting, or estimating, an output based on one or more inputs
+(ISLR \#1).
 
-Unsupervised learning: In this case, we only have predictors but not
-response, which means that there is no answer key for the prediction
-(from lecture). With the unsupervised learning, there are inputs but no
-supervising output; nevertheless we can learn relationships and
-structure from such data. For example, in a marketing setting, we might
-have demographic information for a number of current or potential
-customers. We may wish to understand which types of customers are
-similar to each other by grouping individuals according to their
-observed characteristics. This is known as a clustering problem. Unlike
-in the supervised learning, here we are not trying to predict an output
-variable (ISLR \#1 \& \#4).
+\textbf{Unsupervised learning:} In this case, we only have predictors
+but not response, which means that there is no answer key for the
+prediction (from lecture). With the unsupervised learning, there are
+inputs but no supervising output; nevertheless we can learn
+relationships and structure from such data. For example, in a marketing
+setting, we might have demographic information for a number of current
+or potential customers. We may wish to understand which types of
+customers are similar to each other by grouping individuals according to
+their observed characteristics. This is known as a clustering problem.
+Unlike in the supervised learning, here we are not trying to predict an
+output variable (ISLR \#1 \& \#4).
 
 The main difference between supervised and unsupervised learning is
 whether we have response or not. The goal for supervised learning is to
@@ -163,7 +163,7 @@ lecture).
 problems. Name two commonly used metrics for classification ML problems.
 
 Regression ML problems: MSE, Variance Classification ML problems: Error
-rate, Bayes Error Rate, Bayes classifier
+rate, Bayes Error Rate, Bayes classifier，Accuracy etc.
 
 \textbf{Question 4:} As discussed, statistical models can be used for
 different purposes. These purposes can generally be classified into the
@@ -186,16 +186,17 @@ empirically-driven. Answer the following questions.
 Define mechanistic. Define empirically-driven. How do these model types
 differ? How are they similar?
 
-Mechanistic (Parametric): Parametric methods involve a two-step
+\textbf{Mechanistic (Parametric):} Parametric methods involve a two-step
 model-based approach. Assume a parametric form for function f, and use
 data to train the model. This method, however, would not match true
 unknown function f, and may cause overfitting if there are too many
 parameters (ISLR \#21).
 
-Empirically-driven (non-parametric): Have no assumption about function
-f, require a larger number of observations, are much more flexible by
-default, have the potential to accurately fit a wider range of possible
-shapes for function f, may also have issue of overfitting (ISLR \#23).
+\textbf{Empirically-driven (non-parametric):} Have no assumption about
+function f, require a larger number of observations, are much more
+flexible by default, have the potential to accurately fit a wider range
+of possible shapes for function f, may also have issue of overfitting
+(ISLR \#23).
 
 In general, is a mechanistic or empirically-driven model easier to
 understand? Explain your choice.
@@ -274,11 +275,13 @@ see/learn.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{data}\NormalTok{(}\StringTok{"mpg"}\NormalTok{)}
-\NormalTok{highway\_miles }\OtherTok{\textless{}{-}}\NormalTok{ mpg}\SpecialCharTok{$}\NormalTok{hwy}
-\FunctionTok{hist}\NormalTok{(highway\_miles)}
+\FunctionTok{ggplot}\NormalTok{(mpg,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{hwy))}\SpecialCharTok{+}\FunctionTok{geom\_histogram}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Highway miles per gallon"}\NormalTok{,}\AttributeTok{y=}\StringTok{"Frequency"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
 
 \includegraphics{PSTAT131-HW1_files/figure-latex/unnamed-chunk-1-1.pdf}
 I observe that people mostly drive 15 to 30 miles per gallon on highway.
@@ -291,15 +294,14 @@ hwy and cty? What does this mean?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(mpg}\SpecialCharTok{$}\NormalTok{hwy,mpg}\SpecialCharTok{$}\NormalTok{cty,}\AttributeTok{xlab=}\StringTok{"Highway Miles per Gallon"}\NormalTok{,}\AttributeTok{ylab=}\StringTok{"City Mileage"}\NormalTok{)}
-\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(mpg}\SpecialCharTok{$}\NormalTok{cty}\SpecialCharTok{\textasciitilde{}}\NormalTok{mpg}\SpecialCharTok{$}\NormalTok{hwy,}\AttributeTok{data=}\NormalTok{mpg))}
+\FunctionTok{ggplot}\NormalTok{(mpg,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{hwy,}\AttributeTok{y=}\NormalTok{cty))}\SpecialCharTok{+}\FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Highway Miles per Gallon"}\NormalTok{,}\AttributeTok{y=}\StringTok{"City Mileage"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{PSTAT131-HW1_files/figure-latex/unnamed-chunk-2-1.pdf}
-I notice that there is a positive relationship between highway miles per
-gallon and city mileage. This means that as the highway miles increase,
-city mileage also increases.
+I notice that there is a positive linear relationship between highway
+miles per gallon and city mileage. This means that as the highway miles
+increase, city mileage also increases.
 
 \textbf{Exercise 3:} Make a bar plot of manufacturer. Flip it so that
 the manufacturers are on the y-axis. Order the bars by height. Which
@@ -320,14 +322,14 @@ a pattern? If so, what?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{boxplot}\NormalTok{(mpg}\SpecialCharTok{$}\NormalTok{hwy }\SpecialCharTok{\textasciitilde{}}\NormalTok{ mpg}\SpecialCharTok{$}\NormalTok{cyl,}\AttributeTok{xlab=}\StringTok{"Number of Cylinders"}\NormalTok{,}\AttributeTok{ylab=}\StringTok{"Highway Miles per Gallon"}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(mpg,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{hwy,}\AttributeTok{x=}\FunctionTok{factor}\NormalTok{(cyl)))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Number of Cylinders"}\NormalTok{,}\AttributeTok{y=}\StringTok{"Highway Miles per Gallon"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{PSTAT131-HW1_files/figure-latex/unnamed-chunk-4-1.pdf}
 Observation: I notice that cars with fewer cylinders can drive more
-miles per gallon. In other words, cars with more cylinders consume more
-gas.
+miles per gallon on highway. In other words, cars with more cylinders
+consume more gas.
 
 \textbf{Exercise 5:} Use the corrplot package to make a lower triangle
 correlation matrix of the mpg dataset. (Hint: You can find information
@@ -356,15 +358,52 @@ surprise you?
 \end{Shaded}
 
 \includegraphics{PSTAT131-HW1_files/figure-latex/unnamed-chunk-5-1.pdf}
-Observation of strong positive relationship: cyl and displ, hwy and cty
-Observation of strong negative relationship: cty and displ, hwy and
+Observation of strong positive correlation: cyl and displ, hwy and cty
+Observation of strong negative correlation: cty and displ, hwy and
 displ, cty and cyl, hwy and cyl Observation of weak positive
-relationship: year and displ, cyl and year Observation of weak negative
-relationship: cty and year, hwy and year I think this makes sense
-because hwy and cty essentially similar to each other, so their
-correlation with other variables are quite similar. Moreover, I do not
-think the year of manufacturing would have any impact on city mileage or
-the number of cylinders that a car has. This turns out to be true in
-this correlation graph.
+correlation: year and displ, cyl and year Observation of weak negative
+correlation: cty and year, hwy and year I think this makes sense because
+hwy and cty essentially similar to each other, so their correlation with
+other variables are quite similar. Moreover, I do not think the year of
+manufacturing would have any impact on city mileage or the number of
+cylinders that a car has. This also turns out to be true in this
+correlation graph.
+
+Exercise 6: Recreate the following graphic, as closely as you can. Hint:
+Use the ggthemes package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggthemes)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(mpg, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{hwy,}\AttributeTok{y=}\NormalTok{class))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Highway MPG"}\NormalTok{,}\AttributeTok{y=}\StringTok{"Vehnicle Class"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_gdocs}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PSTAT131-HW1_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+Exercise 7 Recreate the following graphic.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mpg, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{class,}\AttributeTok{y=}\NormalTok{hwy,}\AttributeTok{fill=}\NormalTok{drv))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"class"}\NormalTok{,}\AttributeTok{y=}\StringTok{"hwy"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_color\_calc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PSTAT131-HW1_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+Exercise 8 Recreate the following graphic.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mpg,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{displ,}\AttributeTok{y=}\NormalTok{hwy))}\SpecialCharTok{+}\FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{drv))}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"displ"}\NormalTok{,}\AttributeTok{y=}\StringTok{"hwy"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_shape\_stata}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{linetype=}\NormalTok{drv))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{PSTAT131-HW1_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 \end{document}
