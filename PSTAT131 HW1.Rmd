@@ -21,26 +21,41 @@ The main difference between supervised and unsupervised learning is whether we h
 Question 2:
 Explain the difference between a regression model and a classification model, specifically in the context of machine learning.
 
+The difference between a regression model and a classification model is whether the output is quantitative or qualitative.For a regression model, the outputs are continuous or quantitative. For a classification model, the outputs are qualitative, i.e. categorical values.(from lecture)
+
 Question 3:
 Name two commonly used metrics for regression ML problems. Name two commonly used metrics for classification ML problems.
+
+Regression ML problems: MSE, Variance
+Classification ML problems: Error rate, Bayes Error Rate, Bayes classifier
 
 Question 4:
 As discussed, statistical models can be used for different purposes. These purposes can generally be classified into the following three categories. Provide a brief description of each.
 
-Descriptive models:
+Descriptive models: choose model to best visually emphasize a trend in data
 
-Inferential models:
+Inferential models: infer significant features of model,state relationship between outcome & predictors, aim to test theories, have possibly causal claims 
 
-Predictive models:
+Predictive models: aim to predict output with minimum reducible error, not focus on hypothesis tests
 
 Question 5:
 Predictive models are frequently used in machine learning, and they can usually be described as either mechanistic or empirically-driven. Answer the following questions.
 
 Define mechanistic. Define empirically-driven. How do these model types differ? How are they similar?
 
+Mechanistic (Parametric): Parametric methods involves a two-step model-based approach. Assume a parametric form for function f, and use data to train the model. This method, however, would not match true unknown function f, and may cause overfitting if there are too many parameters. (ISLR #21)
+
+Empirically-driven (non-parametric): Have no assumption about function f, require a larger number of observations, are much more flexible by default, have the potential to accurately fit a wider range of possible shapes for function f, may also have issue of overfitting. (ISLR #23)
+
 In general, is a mechanistic or empirically-driven model easier to understand? Explain your choice.
 
+I personally think that mechanistic model is easier to understand compared to empirically-driven model, as mechanistic model essentially reduces the problem of estimating f down to one of estimating a set of parameters, meaning that the parametric form of the model is assumed in the first place. I am more familiar with the parametric forms and parameter estimation compared to the procedure that non-parametric method has. 
+
+
 Describe how the bias-variance tradeoff is related to the use of mechanistic or empirically-driven models.
+
+Mechanistic models usually have high bias and low variance since we assume the parametric form of the model in the first place. Empirically-driven models, on the other hand, have low bias and high variance due to the lack of assumption of functional form. 
+
 
 Question 6:
 A political candidate’s campaign has collected some detailed voter history data from their constituents. The campaign is interested in two questions:
@@ -50,3 +65,74 @@ Given a voter’s profile/data, how likely is it that they will vote in favor of
 How would a voter’s likelihood of support for the candidate change if they had personal contact with the candidate?
 
 Classify each question as either predictive or inferential. Explain your reasoning for each.
+
+
+
+
+
+
+Exploratory Data Analysis
+This section will ask you to complete several exercises. For this homework assignment, we’ll be working with the mpg data set that is loaded when you load the tidyverse. Make sure you load the tidyverse and any other packages you need.
+
+Exploratory data analysis (or EDA) is not based on a specific set of rules or formulas. It is more of a state of curiosity about data. It’s an iterative process of:
+
+generating questions about data
+visualize and transform your data as necessary to get answers
+use what you learned to generate more questions
+A couple questions are always useful when you start out. These are “what variation occurs within the variables,” and “what covariation occurs between the variables.”
+
+You should use the tidyverse and ggplot2 for these exercises.
+
+Exercise 1:
+We are interested in highway miles per gallon, or the hwy variable. Create a histogram of this variable. Describe what you see/learn.
+```{r}
+library(tidyverse)
+data("mpg")
+highway_miles <- mpg$hwy
+hist(highway_miles)
+
+```
+I observe that people mostly drive 15 to 30 miles per gallon on highway. In particular, 25 to 30 miles per gallon has the highest frequency. Only a few can drive 35 to 45 miles per gallon on highway. 
+
+Exercise 2:
+Create a scatterplot. Put hwy on the x-axis and cty on the y-axis. Describe what you notice. Is there a relationship between hwy and cty? What does this mean?
+```{r}
+plot(mpg$hwy,mpg$cty,xlab="Highway Miles per Gallon",ylab="City Mileage")
+abline(lm(mpg$cty~mpg$hwy,data=mpg))
+```
+I notice that there is a positive relationship between highway miles per gallon and city mileage. This means that as the highway miles increase, city mileage also increases. 
+
+Exercise 3:
+Make a bar plot of manufacturer. Flip it so that the manufacturers are on the y-axis. Order the bars by height. Which manufacturer produced the most cars? Which produced the least?
+```{r}
+ggplot(mpg, aes(y=reorder(factor(manufacturer),manufacturer,function(y)-length(y),decreasing=TRUE)))+geom_bar() 
+```
+Dodge produced the most cars, whereas lincoln produced the least cars.
+
+
+Exercise 4:
+Make a box plot of hwy, grouped by cyl. Do you see a pattern? If so, what?
+```{r}
+boxplot(mpg$hwy ~ mpg$cyl,xlab="Number of Cylinders",ylab="Highway Miles per Gallon")
+```
+I notice that cars with fewer cylinders can drive more miles per gallon. In other words, cars with more cylinders consume more gas. 
+
+
+Exercise 5:
+Use the corrplot package to make a lower triangle correlation matrix of the mpg dataset. (Hint: You can find information on the package here.)
+
+Which variables are positively or negatively correlated with which others? Do these relationships make sense to you? Are there any that surprise you?
+```{r}
+new_mpg <- mpg %>%
+  select(-manufacturer,-model,-trans,-class,-fl,-drv)
+corrplot(cor(new_mpg), method='number',type='lower')
+```
+Observation of strong positive relationship:
+cyl and displ, hwy and cty
+Observation of strong negative relationship:
+cty and displ, hwy and displ, cty and cyl, hwy and cyl
+Observation of weak positive relationship:
+year and displ, cyl and year
+Observation of weak negative relationship:
+cty and year, hwy and year
+I think this makes sense because hwy and cty essentially similar to each other, so their correlation with other variables are quite similar. Moreover, I do not think the year of manufacturing would have any impact on city mileage or the number of cylinders that a car has. This turns out to be true in this correlation graph.
