@@ -198,6 +198,12 @@ flexible by default, have the potential to accurately fit a wider range
 of possible shapes for function f, may also have issue of overfitting
 (ISLR \#23).
 
+They are different in the way that mechanistic model assumes the
+parametric form of function f in the first place whereas the
+empirically-driven model has no assumption of function
+f.~Empirically-driven model is thus more flexible than mechanistic
+model. However, both models may encounter issue of overfitting.
+
 In general, is a mechanistic or empirically-driven model easier to
 understand? Explain your choice.
 
@@ -322,7 +328,7 @@ a pattern? If so, what?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(mpg,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{hwy,}\AttributeTok{x=}\FunctionTok{factor}\NormalTok{(cyl)))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Number of Cylinders"}\NormalTok{,}\AttributeTok{y=}\StringTok{"Highway Miles per Gallon"}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(mpg,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{factor}\NormalTok{(cyl),}\AttributeTok{y=}\NormalTok{hwy))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Number of Cylinders"}\NormalTok{,}\AttributeTok{y=}\StringTok{"Highway Miles per Gallon"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
